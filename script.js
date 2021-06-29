@@ -123,33 +123,41 @@ img2.addEventListener("load", () => {
 })
 
 
+// recursiveness => creating loops with functions invoking itself
 
+// control variable to make the recursiveness stop
 // let controlVar = 0;
 
 // const printSomething = () => {
+//   // control update
 //   controlVar++
 
+//   // action
 //   console.log("printing")
 
+//   // conditional recursiveness
 //   if (controlVar < 300) {
-//     requestAnimationFrame(printSomething)
-//     // printSomething() // => recursiveness
+//     requestAnimationFrame(printSomething) // => happends every fram (used for animations)
+//     // printSomething() // => recursiveness. happends TOO fast
 //   }
 // }
 
-
+// initial invocation
 // printSomething()
 
+// global variables that can be changes in our code
 let cubeX = 50;
 let cubeY = 700;
 let shouldCubeMove = true;
 
+// main logic function for animation
 const cubeMovement = () => {
   // 1. clear canvas
   ctx.clearRect(0, 700, canvas.width, canvas.height)
 
   // 2. change position of the cube (all elements)
   cubeX += 4
+    // conditional to make the loop stop at some point
   if (cubeX > 500) {
     shouldCubeMove = false
   }
@@ -158,11 +166,11 @@ const cubeMovement = () => {
   ctx.fillRect(cubeX, cubeY, 60, 60)
   // ctx.drawImage(img2, cubeX, cubeY, 80, 100) // => 
 
-  // 4. animate the cube
+  // 4. animate the cube (with condition to end the loop)
   if (shouldCubeMove) {
     requestAnimationFrame(cubeMovement)
   }
 }
 
-
+// initial invocation
 cubeMovement()
