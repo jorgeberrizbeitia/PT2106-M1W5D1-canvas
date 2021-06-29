@@ -1,3 +1,5 @@
+
+
 const canvas = document.querySelector("#my-canvas")
 canvas.style.backgroundColor = "lightgray"
 
@@ -96,6 +98,71 @@ ctx.closePath()
 // Math.PI * 2 // => circles
 
 // TEXT
+ctx.font = "bolder 30px serif";
 ctx.fillStyle = "magenta"
-ctx.font = "30px serif";
 ctx.fillText("BREAK PLZ", 400, 300)
+
+
+// IMAGE methods
+
+let img = new Image()
+img.src = "https://tinyurl.com/ironhack-pokemons/5.svg"
+
+// addaddEventListener => "load" to prevent images from not loading properly. Assigning a new src takes a bit of time, is asynchronous.
+img.addEventListener("load", () => {
+  // syntax
+  // ctx.drawImage(imageObj, x, y, width, height)
+  ctx.drawImage(img, 400, 500, 80, 100)
+})
+
+let img2 = new Image()
+img2.src = "https://tinyurl.com/ironhack-pokemons/9.svg"
+
+img2.addEventListener("load", () => {
+  ctx.drawImage(img2, 500, 500, 80, 100)
+})
+
+
+
+// let controlVar = 0;
+
+// const printSomething = () => {
+//   controlVar++
+
+//   console.log("printing")
+
+//   if (controlVar < 300) {
+//     requestAnimationFrame(printSomething)
+//     // printSomething() // => recursiveness
+//   }
+// }
+
+
+// printSomething()
+
+let cubeX = 50;
+let cubeY = 700;
+let shouldCubeMove = true;
+
+const cubeMovement = () => {
+  // 1. clear canvas
+  ctx.clearRect(0, 700, canvas.width, canvas.height)
+
+  // 2. change position of the cube (all elements)
+  cubeX += 4
+  if (cubeX > 500) {
+    shouldCubeMove = false
+  }
+
+  // 3. draw the cube (all elements)
+  ctx.fillRect(cubeX, cubeY, 60, 60)
+  // ctx.drawImage(img2, cubeX, cubeY, 80, 100) // => 
+
+  // 4. animate the cube
+  if (shouldCubeMove) {
+    requestAnimationFrame(cubeMovement)
+  }
+}
+
+
+cubeMovement()
